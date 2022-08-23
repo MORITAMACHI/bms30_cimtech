@@ -1,0 +1,65 @@
+<?php
+//セッションの開始
+session_start();
+
+?>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>購入状況確認</title>
+	</head>
+    <body>
+		<h1 align="center" color="red">書籍管理システム</h1>
+		<hr align="center" size="5" color="red" width="100%">
+		<table width="100%">
+			<tr>
+				<td width="33%">&nbsp;</td>
+				<td align="center" width="34%"><h2>購入状況確認</h2></td>
+				<td width="33%">
+					<table align="right">
+						<tr>
+							<td>名前：<?=$_SESSION['userInfo']['user']?></td>
+						</tr>
+						<tr>
+							<td>権限：管理者</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+		</table>
+		<hr align="center" size="2" color="red" width="100%">
+		<br><br>
+		<?php
+		if(isset($orderedArray)){
+		?>
+		<table align="center" >
+			<tr>
+				<td>ユーザー</td>
+				<td>Title</td>
+				<td>数量</td>
+				<td>注文日</td>
+			</tr>
+			<?php
+			foreach($orderedArray as $val){
+			?>
+			<tr>
+				<td><?=$val->getUser()?></td>
+				<td><?=$val->getTitle()?></td>
+				<td><?=$val->getQuantity()?></td>
+				<td><?=$val->getDate()?></td>
+			</tr>
+		<?php
+	       	}
+		}else{
+		    echo "購入状況はありません。";
+		}
+		?>
+		</table>
+
+		<br><br><br>
+		<hr align="center" size="2" color="red" width="100%">
+		<table align="center" width="100%">
+			<tr><td>Copyright (C) 2022 All Rights Reserved.</td></tr>
+		</table>
+	</body>
+</html>

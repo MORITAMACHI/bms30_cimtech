@@ -1,0 +1,71 @@
+<?php
+//セッションの開始
+session_start();
+
+//権限の判別
+if($_SESSION['userInfo']['authority'] == 1){
+    $authority = "一般ユーザー";
+}else{
+    $authority = "管理者";
+}
+?>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>Menu</title>
+	</head>
+    <body>
+		<h1 align="center" color="red">書籍管理システム</h1>
+		<hr align="center" size="5" color="red" width="100%">
+		<table width="100%">
+			<tr>
+				<td width="33%">&nbsp;</td>
+				<td align="center" width="34%"><h2>MENU</h2></td>
+				<td width="33%">
+					<table align="right">
+						<tr>
+							<td>名前：<?=$_SESSION['userInfo']['user']?></td>
+						</tr>
+						<tr>
+							<td>権限：<?=$authority?></td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+		</table>
+		<hr align="center" size="2" color="red" width="100%">
+		<br><br>
+		<?php
+		if($_POST['user']['authority'] == 1){
+		?>
+		<table align="center" >
+			<tr><td><a href="../list/list.php">【書籍一覧】</a><br><br></td></tr>
+			<tr><td><a href="../showCart/showCart.php">【カート状況確認】</a><br><br></td></tr>
+			<tr><td><a href="../orderHistory/orderHistory">【購入履歴】</a><br><br></td></tr>
+			<tr><td><a href="../changePassword/changePassword.php">【パスワード変更】</a><br><br></td></tr>
+			<tr><td><a href="../logout/logout.php">【ログアウト】</a></td></tr>
+		</table>
+		<?php
+		}else{
+		?>
+		<table align="center">
+			<tr><td><a href="../list/list.php">【書籍一覧】</a><br><br></td></tr>
+			<tr><td><a href="../insert/insert.php">【書籍登録】</a><br><br><br><br></td></tr>
+			<tr><td><a href="../insertIniData/insertIniData.php">【初期データ登録（データがない場合のみ）】</a><br><br></td></tr>
+			<tr><td><a href="../orderStatus/orderStatus.php">【購入状況確認】</a><br><br></td></tr>
+			<tr><td><a href="../showSalesByMonth/showSalesByMonth.php">【売り上げ状況】</a><br><br></td></tr>
+			<tr><td><a href="../insertUser/insertUser.php">【ユーザー登録】</a><br><br></td></tr>
+			<tr><td><a href="../listUser/listUser.php">【ユーザー一覧】</a><br><br></td></tr>
+			<tr><td><a href="../changePassword/changePassword.php">【パスワード変更】</a><br><br></td></tr>
+			<tr><td><a href="../logout/logout.php">【ログアウト】</a></td></tr>
+		</table>
+		<?php
+		}
+		?>
+		<br><br><br>
+		<hr align="center" size="2" color="red" width="100%">
+		<table align="center" width="100%">
+			<tr><td>Copyright (C) 2022 All Rights Reserved.</td></tr>
+		</table>
+	</body>
+</html>
