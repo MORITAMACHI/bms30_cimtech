@@ -1,0 +1,110 @@
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<style>
+		  body{
+		      width: 900px;
+		      margin: auto;
+		  }
+		  table.tbl{
+		      width: 800px;
+		      margin: auto;
+		      border: solid 1px;
+		      border-collapse:  collapse;
+		      padding: 5px;
+		      text-align: center;
+		  }
+		  table.tbl th{
+		      background-color: #d2b48c;
+		  }
+		  input[type="submit"] {
+            	background: #28d;
+            	border-color: transparent;
+            	color: #fff;
+            	cursor: pointer;
+            	width: 100px;
+          }
+          header{
+            display: flex;
+          }
+          header p { flex: 1;}
+          header h3 { flex: auto; text-align: center; }
+          nav {
+             margin-left: auto;
+             flex: 1;
+          }
+          nav ul {
+        	list-style: none;
+        	margin: 0;
+        	padding: 0;
+        	display: flex;
+          }
+          nav a {
+            width: 100px;
+            text-decoration: none;
+            text-align: center;
+            line-height: 65px;
+            display: block;
+          }
+		</style>
+		<title>showSalesByMonth</title>
+	</head>
+    <body>
+    	<h1 align="center">書籍管理システム3.0版（シムテック）</h1>
+    	<hr color="blue">
+    	<header>
+    		<p></p>
+    		<h3>売上状況確認画面</h3>
+    		<nav>
+    			<ul>
+    				<li><a href="../menu/menu.php">メニュー</a></li>
+    				<li><a href="../list/list.php">書籍一覧</a></li>
+    			</ul>
+    		</nav>
+    	</header>
+    	<hr color="#000" style="margin-bottom: 20px;">
+
+
+      <form action = "showSalesByMonth.php" method="post">
+
+        	売り上げ月を選択してください。
+        	<input type="month" name="date" required pattern="[0-9]{4}-[0-9]{2}" autocomplete="on"
+        	title="入力の形は、4桁の数字、ハイフン（-）、2桁の数字です。" placeholder="yyyy-mm" value="<?=$_POST['date']?>">
+        	<!-- FireFoxとeclipseの内部ブラウザは非対応 -->
+
+        	<input type="submit" name="sales" value="送信">
+        </form>
+
+		<?php if(isset($salesArray)){ ?>
+			<table class="tbl">
+				<tr>
+        			<th>ISBN</th>
+        			<th>title</th>
+        			<th>価格</th>
+        			<th>合計</th>
+        			<th>個数</th>
+        		</tr>
+
+        	<?php foreach ($salesArray as $val){      // オブジェクトが格納された配列?>
+        		<tr>
+        			<td><?=$val->getIsbn()?></td>
+        			<td><?=$val->getTitle()?></td>
+        			<td><?=createMoneyFormat($val->getPrice())?></td>
+        			<td><?=$val->getTotalQuantity()?>冊</td>
+        			<td style="background-color: #f5deb3;"><?=createMoneyFormat($val->getSubTotalSales())?></td>
+        		</tr>
+        	<?php }?>
+			</table>
+		<?php }elseif($_POST['sales']) { // 送信ボタンは押下されているが、売り上げがない時 ?>
+		<p>選択された月の売り上げはありません。</p>
+		<?php }?>
+		<?php if(isset($total) && $total != 0) {?>
+    		<br><br><br>
+    		<table style="width: 400px; margin-left: auto; text-align: center;">
+    			<tr><th>合計</th><td style="background-color: #f5deb3;"><?=createMoneyFormat($total)?></td></tr>
+    		</table>
+		<?php }?>
+
+
+    </body>
+</html>
