@@ -1,0 +1,88 @@
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<style type="text/css">
+		  body{
+		      width: 900px;
+		      margin: auto;
+		      min-height: 600px;
+		  }
+		  table {
+		      width: 600px;
+		      margin: auto;
+		      text-align: center;
+		  }
+		  th {
+		       background-color: #d2b48c;
+		  }
+		   header{
+            display: flex;
+            align-items: center;
+           }
+           header p { flex: 1;}
+           header h3 { flex: auto; text-align: center; }
+           nav {
+             flex: 1;
+             width: 200px;
+           }
+           nav ul {
+        	list-style: none;
+        	margin: 0;
+        	padding: 0;
+        	display: flex;
+           }
+           nav a {
+            width: 100px;
+            text-decoration: none;
+            text-align: center;
+            line-height: 65px;
+            display: block;
+           }
+		</style>
+		<title>Insert title here</title>
+	</head>
+    <body>
+    	<!-- header -->
+    	<h1 align="center">書籍管理システム3.0版（シムテック）</h1>
+    	<hr color="blue">
+    	<header>
+    		<nav>
+    			<ul>
+    				<li><a href="../menu/menu.php">メニュー</a></li>
+    				<li><a href="../list/list.php">書籍一覧</a></li>
+    			</ul>
+    		</nav>
+    		<h3>購入履歴確認画面</h3>
+    		<p>名前：<?=$_SESSION['userInfo']['user']?><br>
+    		   権利：一般ユーザー</p>
+    	</header>
+    	<hr color="#000" style="margin-bottom: 20px;">
+
+		<!-- table -->
+		<?php if(isset($array)){ ?>
+			<table>
+				<tr>
+        			<th>title</th>
+        			<th>個数</th>
+        			<th>日付</th>
+        		</tr>
+
+        	<?php foreach ($array as $val){     ?>
+        		<tr>
+        			<td><?=$val->getTitle()?></td>
+        			<td><?=$val->getQuantity()?>冊</td>
+        			<td><?=date('m月d日', strtotime($val->getDate()))?></td>
+        		</tr>
+        	<?php }?>
+			</table>
+		<?php }else {  ?>
+		<p>まだ購入履歴はありません。</p>
+		<?php }?>
+
+		<!-- footer -->
+		<footer style="bottom: 0; position: absolute;">
+		<hr color="blue" width="900">
+		Copyright (C) 2022 All Rights Reserved.
+		</footer>
+    </body>
+</html>
