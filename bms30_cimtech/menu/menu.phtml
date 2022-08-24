@@ -36,10 +36,10 @@ if($_SESSION['userInfo']['authority'] == 1){
 		<hr align="center" size="2" color="red" width="100%">
 		<br><br>
 		<?php
-		if($_POST['user']['authority'] == 1){
+		if($authority == "一般ユーザー"){
 		?>
 		<table align="center" >
-			<tr><td><a href="../list/list.php">【書籍一覧】</a><br><br></td></tr>
+			<tr><td><a href="../listBook/listBook.php">【書籍一覧】</a><br><br></td></tr>
 			<tr><td><a href="../showCart/showCart.php">【カート状況確認】</a><br><br></td></tr>
 			<tr><td><a href="../orderHistory/orderHistory.php">【購入履歴】</a><br><br></td></tr>
 			<tr><td><a href="../changePassword/changePassword.php">【パスワード変更】</a><br><br></td></tr>
@@ -49,9 +49,9 @@ if($_SESSION['userInfo']['authority'] == 1){
 		}else{
 		?>
 		<table align="center">
-			<tr><td><a href="../list/list.php">【書籍一覧】</a><br><br></td></tr>
-			<tr><td><a href="../insert/insert.php">【書籍登録】</a><br><br><br><br></td></tr>
-			<tr><td><a href="../insertIniData/insertIniData.php">【初期データ登録（データがない場合のみ）】</a><br><br></td></tr>
+			<tr><td><a href="../listBook/listBook.php">【書籍一覧】</a><br><br></td></tr>
+			<tr><td><a href="../insertBook/insertBook.php">【書籍登録】</a><br><br><br><br></td></tr>
+			<tr><td><a href="../insertIntoData/insertIntoData.php">【初期データ登録（データがない場合のみ）】</a><br><br></td></tr>
 			<tr><td><a href="../orderStatus/orderStatus.php">【購入状況確認】</a><br><br></td></tr>
 			<tr><td><a href="../showSalesByMonth/showSalesByMonth.php">【売り上げ状況】</a><br><br></td></tr>
 			<tr><td><a href="../insertUser/insertUser.php">【ユーザー登録】</a><br><br></td></tr>
