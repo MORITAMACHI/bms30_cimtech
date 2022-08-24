@@ -1,0 +1,136 @@
+<?php
+//セッションの開始
+session_start();
+
+//権限の判別
+if($_SESSION['userInfo']['authority'] == 1){
+    $authority = "一般ユーザー";
+}else{
+    $authority = "管理者";
+}
+?>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>List</title>
+	</head>
+    <body>
+		<h1 align="center" color="red">書籍管理システム</h1>
+		<hr align="center" size="5" color="red" width="100%">
+		<table width="100%">
+			<tr>
+				<td align="right" width="15%"><a href="../menu/menu.php">[メニュー]</a></td>
+				<td align="left" width="15%"><a href="../insertBook/insertBook.php">[書籍登録]</a></td>
+				<td align="center" width="34%"><h2>書籍一覧</h2></td>
+				<td width="33%">
+					<table align="right">
+						<tr>
+							<td>名前：<?=$_SESSION['userInfo']['user']?></td>
+						</tr>
+						<tr>
+							<td>権限：<?=$authority?></td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+		</table>
+		<hr align="center" size="2" color="red" width="100%">
+		<br><br>
+		<table align="center">
+			<tr>
+				<td>
+					<form action="./searchBook.php" method="post">
+						ISBN:<input type=text size="20" name="isbn"  value="" />
+						TITLE:<input type=text size="20" name="title"  value="" />
+						価格:<input type=text size="20" name="price"  value="" />
+						<input type="submit" value="検索" />
+					</form>
+				</td>
+				<td>
+					<form action="./listBook.php"><input type="submit" value="全件表示" /></form>
+				</td>
+			</tr>
+		</table>
+		<br/>
+		<?php
+		if($authority == "一般ユーザー"){
+		?>
+		    <table align="center">
+		    <tr >
+		    <th bgcolor="#6666FF" width="23%">ISBN</th>
+		    <th bgcolor="#6666FF" width="24%">TITLE</th>
+		    <th bgcolor="#6666FF" width="23%">価格</th>
+		    <th bgcolor="#6666FF" width="15%">購入数</th>
+		    <th bgcolor="#6666FF" width="15%">&nbsp</th>
+		    </tr>
+		    <?php
+			//検索結果を表示
+			if(!is_null($model->getBookList())){
+				foreach($model->getBookList() as $row){
+			?>
+			<tr>
+				<td align="center"><a href="detailBook.php?isbn=<?=$row[0]?>"><?=$row[0]?></a></td>
+				<td align="center"><?=$row[1]?></td>
+				<td align="center"><?=$row[2]?>円</td>
+				<td align="center"><input type="text" size="5" name="quantity" value=""></td>
+			    <td align="center">
+					<form action="insertCart.php" method="post">
+			    		<input type="submit" value="カートに入れる">
+			    	</form>
+			    </td>
+
+			</tr>
+	    <?php
+		        }
+		    }else{
+		?>
+			<tr>
+				<td colspan="5" align="center">書籍データは1件もありません。</td>
+			</tr>
+	    <?php
+		    }
+		?>
+			</table>
+		<?php
+		}elseif ($authority =="管理者"){
+		?>
+		<table align="center" width="100%">
+			<tr >
+				<th bgcolor="#6666FF" width="23%">ISBN</th>
+				<th bgcolor="#6666FF" width="24%">TITLE</th>
+				<th bgcolor="#6666FF" width="23%">価格</th>
+				<th bgcolor="#6666FF" width="15%">&nbsp</th>
+				<th bgcolor="#6666FF" width="15%">&nbsp</th>
+			</tr>
+			<?php
+			//検索結果を表示
+			if(!is_null($model->getBookList())){
+				foreach($model->getBookList() as $row){
+			?>
+			<tr>
+				<td align="center"><a href="../detailBook/detailBook.php?isbn=<?=$row[0]?>"><?=$row[0]?></a></td>
+				<td align="center"><?=$row[1]?></td>
+				<td align="center"><?=$row[2]?>円</td>
+				<td align="center"><a href="../updateBook/updateBook.php">変更</a>
+				<td align="center"><a href="../deleteBook/deleteBook.php">削除</a>
+			</tr>
+			<?php
+				}
+			}else{
+			?>
+			<tr>
+				<td colspan="4" align="center">書籍データは1件もありません。</td>
+			</tr>
+		<?php
+			}
+		}
+		?>
+
+		</table>
+		<br><br><br><br><br><br><br><br><br><br>
+		<hr align="center" size="2" color="red" width="100%"></hr>
+		<table align="center" width="100%">
+			<tr><td>copyright (c) 2022 all rights reserved.</td></tr>
+		</table>
+	</body>
+</html>
