@@ -39,9 +39,9 @@ class SearchUser{
      *
      */
     public function changeString($num){
-        if($num == 1){
+        if($num == 2){
             return '管理者';
-        }elseif($num == 2){
+        }elseif($num == 1){
             return '一般ユーザー';
         }else{
             // 0ならば初期化されたまま、他の数字はなぞ
