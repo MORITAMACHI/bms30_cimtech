@@ -11,7 +11,7 @@ class OrderHistory{
      * →セッション保持かどうか確認するメソッド
      */
     function sessionCheck (){
-        if (! isset($_SESSION['user'])) { // セッション非保持時
+        if (! isset($_SESSION['userInfo'])) { // セッション非保持時：[追記]セッションの名前変更08/24
             header("Location:../login/login.php?errorMsg=セッション切れです。ログインしてください");
             exit();
         }
