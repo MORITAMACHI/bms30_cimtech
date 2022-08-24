@@ -39,6 +39,9 @@ class uriage_model {
             }else{
                 return false;
             }
+            
+            //結果保持用メモリを開放する　追記：08/24,Takeda
+            mysqli_free_result($result);
         }
     }
 
