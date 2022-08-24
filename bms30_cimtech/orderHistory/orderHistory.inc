@@ -35,6 +35,9 @@ class OrderHistory{
 
                 $orderArray[] = $order;
             }
+            //結果保持用メモリを開放する　追記：08/24
+            mysqli_free_result($result);
+            
             return $orderArray;
         }
     }
