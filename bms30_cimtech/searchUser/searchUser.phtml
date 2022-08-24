@@ -1,0 +1,122 @@
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>searchUser</title>
+		<style type="text/css">
+		  body{
+		      width: 900px;
+		      margin: auto;
+		      min-height: 600px;
+		  }
+		  table {
+		      width: 800px;
+		      margin: auto;
+		      text-align: center;
+		  }
+		  th {
+		       background-color: #b5e9ff; /* 赤に合うように色変えてみたよ    */
+		       width: 200px;
+		  }
+		   header{
+            display: flex;
+            align-items: center;
+           }
+           header p { flex: 1;}
+           header h3 { flex: auto; text-align: center; }
+           nav {
+             flex: 1;
+             width: 200px;
+           }
+           nav ul {
+        	list-style: none;
+        	margin: 0;
+        	padding: 0;
+        	display: flex;
+           }
+           nav a {
+            width: 100px;
+            text-decoration: none;
+            text-align: center;
+            line-height: 65px;
+            display: block;
+           }
+		</style>
+	</head>
+    <body>
+    	<!-- header -->
+    	<h1 align="center">書籍管理システム3.0版（シムテック）</h1>
+    	<hr color="red">
+    	<header>
+    		<nav>
+    			<ul>
+    				<li><a href="../menu/menu.php">メニュー</a></li>
+    				<li><a href="../listUser/listUser.php">ユーザー一覧</a></li>
+    			</ul>
+    		</nav>
+    		<h3>ユーザー詳細</h3>
+    		<p>名前：<?=$_SESSION['userInfo']['user']?><br>
+    		   権利：<?=$obj->changeString($_SESSION['userInfo']['authority'])?></p>
+    	</header>
+    	<hr color="red" style="margin-bottom: 20px;">
+
+		<!-- main -->
+    	<table style="width: 500px;">
+			<tr>
+				<td>
+					<form action="searchUser.php" method="post">
+						ユーザー:<input type=text name="user">
+						<input type="submit" name ="search" value="検索">
+					</form>
+				</td>
+				<td>
+					<form action="../listUser/listUser.php">
+						<input type="submit"name="all" value="全件表示" />
+					</form>
+				</td>
+
+			</tr>
+		</table>
+		<br>
+        <table>
+       		<tr>
+				<th>ユーザー</th>
+				<th>Eメール</th>
+				<th>権限</th>
+				<th></th>
+			</tr>
+    	<?php
+    	// 検索ボタンが押された時に下記処理へ
+    	if(isset($_POST['search'])){
+    	    ?>
+			<tr>
+				<td><a href="../detailUser/detailUser.php?user=<?=$user->getUser()?>&authority=<?=$user->getAuthority()?>" target="_self"><?=$user->getUser()?></a></td>
+				<td><?=$user->getEmail()?></td>
+				<td><?=$user->getAuthority()?></td>
+				<td>
+					<a href="../updateUser/updateUser.php?user=<?=$user->getUser()?>&authority=<?=$user->getAuthority()?>">更新</a> <a
+					href="../deleteUser/deleteUser.php?user=<?=$user->getUser()?>&authority=<?=$user->getAuthority()?>"
+					onclick="return clickEvent()">削除</a>
+				</td>
+			</tr>
+    	<?php
+
+            }
+    	?>
+    	</table>
+    	<script>
+        function clickEvent() {
+        	var result = window.confirm('削除します。よろしいですか？');
+        	if(!result){
+            	return false;
+        	}
+        }
+		</script>
+
+		<!-- footer -->
+		<footer style="bottom: 0; position: absolute;">
+		<hr color="red" width="900">
+		Copyright (C) 2022 All Rights Reserved.
+		</footer>
+
+    </body>
+</html>
