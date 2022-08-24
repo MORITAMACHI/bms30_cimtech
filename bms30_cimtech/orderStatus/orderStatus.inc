@@ -20,6 +20,8 @@ class OrderStatus{
 
             $orderedArray[] = $ordered;
         }
+         //結果保持用メモリを開放する　追記：08/24,Takeda
+         mysqli_free_result($result);
         return $orderedArray;
     }
 }
