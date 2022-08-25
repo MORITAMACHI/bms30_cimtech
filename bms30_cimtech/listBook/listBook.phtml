@@ -76,6 +76,7 @@ if($_SESSION['userInfo']['authority'] == 1){
 			    <td align="center">
 					<form action="insertCart.php" method="post">
 			    		<input type="submit" value="カートに入れる">
+					<input type="hidden" name="isbn" value="<?=$row[0]?>">
 			    	</form>
 			    </td>
 
@@ -111,8 +112,8 @@ if($_SESSION['userInfo']['authority'] == 1){
 				<td align="center"><a href="../detailBook/detailBook.php?isbn=<?=$row[0]?>"><?=$row[0]?></a></td>
 				<td align="center"><?=$row[1]?></td>
 				<td align="center"><?=$row[2]?>円</td>
-				<td align="center"><a href="../updateBook/updateBook.php">変更</a>
-				<td align="center"><a href="../deleteBook/deleteBook.php">削除</a>
+				<td align="center"><a href="../updateBook/updateBook.php?isbn=<?=$row[0]?>">変更</a>
+				<td align="center"><a href="../deleteBook/deleteBook.php?isbn=<?=$row[0]?>">削除</a>
 			</tr>
 			<?php
 				}
