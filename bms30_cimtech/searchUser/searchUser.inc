@@ -22,15 +22,19 @@ class SearchUser{
             $result = executeQuery($db, $sql);
             if($result){
                 while($row = mysqli_fetch_array($result)){
+                    
+                    $user = new User();     //0825追記、たけだ
+                    
                     $user->setUser($row['user']);
                     $user->setEmail($row['email']);
-
                     $user->setAuthority($this->changeString($row['authority']));
+                    
+                    $array[] = $user;       //0825追記、たけだ
                 }
 
                 //結果保持用メモリを開放する
                 mysqli_free_result($result);
-                return $user;
+                return $array;
             }
         }
     }
