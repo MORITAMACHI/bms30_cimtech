@@ -1,0 +1,64 @@
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>ListUser</title>
+	</head>
+    <body>
+    	<div align="center">
+    		<h1>書籍管理システム</h1>
+    		<hr>
+    		<table width="100%">
+				<tr>
+					<td align="center" width="10%" rowspan="2"><a href="../menu/menu.php">[メニュー]</a></td>
+					<td align="center" width="10%" rowspan="2"><a href="../insertUser/insertUser/php">[ユーザー登録]</a></td>
+					<td align="center" width="60%" rowspan="2"><font size="5"><strong>List Of Users</strong></font></td>
+					<td align="left" width= "15%">名前：<?= $User->getUser()?></td>
+					<td width="5%">&nbsp;</td>
+				</tr>
+				<tr>
+					<td align="left" width="15%">権限：<?= $User->getAuthority() ?></td>
+				</tr>
+			</table>
+			<hr>
+			<br>
+    		<table>
+    			<tr>
+        			<td>ユーザー：</td>
+        			<td>
+            			<form action="../searchUser/searchUser.php" method="post">
+            				<input type="text" name="user"> &nbsp; <input type="submit"
+            					name="search" value="search"> <input type="submit" name="searchAll"
+            					value="searchAll">
+            			</form>
+        			</td>
+    			</tr>
+
+    		</table>
+		<br>
+			<table width="100%">
+				<tr>
+					<th align="center" width="25%" bgcolor="#dcdcdc">User</th>
+					<th align="center" width="25%" bgcolor="#dcdcdc">Email</th>
+					<th align="center" width="25%" bgcolor="#dcdcdc">Authority</th>
+					<th align="center" width="25%" bgcolor="#dcdcdc">Update&nbsp;/&nbsp;Delete</th>
+				</tr>
+				<?php
+				foreach($userList as $val){
+				?>
+				<tr>
+					<td align="center" width="25%"><a href="../detailUser/detailUser.php?user<?= $val->getUser() ?>"><?= $val->getUser() ?></a></td>
+					<td align="center" width="25%"><?= $val->getEmail() ?></td>
+					<td align="center" width="25%"><?= $val->getAuthority() ?></td>
+					<td align="center" width="25%">
+						<a href="../updateUser/updateUser.php?user=<?= $val->getUser() ?>">Update</a>
+						&nbsp;/&nbsp;
+						<a href="../deleteUser/deleteUser.php?user=<?= $val->getUser() ?>">Delete</a>
+					</td>
+				</tr>
+				<?php
+				}
+				?>
+			</table>
+    	</div>
+    </body>
+</html>
