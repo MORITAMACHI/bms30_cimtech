@@ -1,0 +1,125 @@
+<?php
+//セッションの開始
+session_start();
+
+//権限の判別
+if($_SESSION['userInfo']['authority'] == 1){
+    $authority = "一般ユーザー";
+}else{
+    $authority = "管理者";
+}
+?>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>Insert title here</title>
+	</head>
+    <body>
+    <h1 align="center" color="green">書籍管理システム</h1>
+		<hr align="center" size="3" color="green" width="100%">
+		<table width="100%">
+			<tr>
+				<td width="33%">[<a href="./menu.php">メニュー</a>]　　
+								[<a href="./list.php">書籍一覧</a>]</td>
+				<td align="center" width="34%">
+				<font color ="#800000" size="3"><h2>書籍詳細情報</h2></font></td>
+				<td width="33%">
+					<table align="right">
+						<tr>
+							<td>名前：<?=$_SESSION['userInfo']['user']?></td>
+						</tr>
+						<tr>
+							<td>権限：<?=$authority?></td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+		</table>
+		<hr align="center" size="1" color="green" width="100%">
+		<br><br>
+
+		<?php
+		if($_POST['user']['authority'] == 1){
+		?>
+		<br><br><br>
+	<form action="listBook.php" method="post">
+    <table align="center" border="0">
+    <tr>
+    <th bgcolor="#DDDDDD" width="200">ISBN</th>
+    <td bgcolor="#CCFFCC" width="200"><?=$book->getIsbn()?></td>
+			</tr>
+
+			<tr>
+				<th bgcolor="#DDDDDD" width="200">TITLE</th>
+				<td bgcolor="#CCFFCC" width="200"><?=$book->getTitle()?></td>
+			</tr>
+
+			<tr>
+				<th bgcolor="#DDDDDD" width="200">価格</th>
+				<td bgcolor="#CCFFCC" width="200"><?=$book->getPrice()?>円</td>
+			</tr>
+
+
+	</table>
+	</form>
+
+	<?php
+		}else{
+		?>
+
+		<div align="center">
+		<table border="0">
+		<!-- 変更ボタン -->
+		<td><form action="listBook.php" method="post">
+			<input type="hidden" name="isbn" value="<?=$_POST['isbn']?>">
+			<input type="submit" name="kekka" value="変更">
+			</form>
+		</td>
+		<td>&emsp;</td>
+		<!-- 削除ボタン -->
+		<td><form action="updateBook.php" method="post">
+			<input type="hidden" name="isbn" value="<?=$_POST['isbn']?>">
+			<input type="submit" name="updateBook" value="削除">
+			</form>
+		</td>
+		</table>
+		</div>
+
+	<br><br>
+
+		<form action="listBook.php" method="post">
+    <table align="center" border="0">
+    <tr>
+    <th bgcolor="#DDDDDD" width="200">ISBN</th>
+    <td bgcolor="#CCFFCC" width="200"><?=$book->getIsbn()?></td>
+			</tr>
+
+			<tr>
+				<th bgcolor="#DDDDDD" width="200">TITLE</th>
+				<td bgcolor="#CCFFCC" width="200"><?=$book->getTitle()?></td>
+			</tr>
+
+			<tr>
+				<th bgcolor="#DDDDDD" width="200">価格</th>
+				<td bgcolor="#CCFFCC" width="200"><?=$book->getPrice()?>円</td>
+			</tr>
+
+
+	</table>
+	</form>
+
+
+
+		<?php
+		}
+		?>
+
+	<br><br><br><br><br><br><br><br><br><br><br>
+
+		<hr align="center" size="1" color="green" width="100%">
+		<table align="center" width="100%">
+			<tr><td>Copyright (C) 2022 All Rights Reserved.</td></tr>
+		</table>
+
+    </body>
+</html>
