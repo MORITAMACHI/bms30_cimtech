@@ -12,7 +12,7 @@ try {
 
     $obj->sessionCheck();
 
-    $user = $obj->search($db, $user);
+    $array = $obj->search($db, $user);  //0825追記、たけだ
 
     require_once 'searchUser.phtml';
 }catch (Exception $e){
