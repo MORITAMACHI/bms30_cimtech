@@ -1,0 +1,81 @@
+<?php
+//セッションの開始
+session_start();
+
+//権限の判別
+if($_SESSION['userInfo']['authority'] == 1){
+    $authority = "一般ユーザー";
+}else{
+    $authority = "管理者";
+}
+
+?>
+
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>Insert title here</title>
+	</head>
+    <body>
+    <div align="center">
+    <font color ="008000">
+	<h2>書籍管理システム</h2>
+    </font>
+    <hr align="center" size="3" color="green">
+    </div>
+
+    <table align="center" width="950">
+			<tr>
+				<td width="75">[<a href="./menu.php">メニュー</a>]</td>
+				<td width="80">[<a href="./insert.php">書籍登録</a>]</td>
+				<td width="80">[<a href="../listBook/.php">書籍一覧</a>]</td>
+				<td  align="left" >
+					　　　　　　　　　　　　　　　　
+					<font color ="#800000" size="5">書籍削除</font>
+				</td>
+				<td width="100">
+				<table>
+						<tr>
+							<td>名前：<?=$_SESSION['userInfo']['user']?></td>
+						</tr>
+						<tr>
+							<td>権限：<?=$authority?></td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+	</table>
+
+    <hr align="center" size="1" color="green" >
+    <br>
+
+
+	<form action="deleteBook.php" method="post">
+    <table align="center" border="0">
+			<tr>
+				<th bgcolor="#DDDDDD" width="200">ISBN</th>
+				<td bgcolor="#CCFFCC" width="200"><?=$book->getIsbn()?></td>
+			</tr>
+
+			<tr>
+				<th bgcolor="#DDDDDD" width="200">TITLE</th>
+				<td bgcolor="#CCFFCC" width="200"><?=$book->getTitle()?></td>
+			</tr>
+
+			<tr>
+				<th bgcolor="#DDDDDD" width="200">価格</th>
+				<td bgcolor="#CCFFCC" width="200"><?=$book->getPrice()?>円</td>
+			</tr>
+
+
+	</table>
+	</form>
+<br>
+	<div align="center">
+	上記データを削除しました。<br><br><br>
+	<a href="list.php">書籍一覧に戻る</a>
+
+	</div>
+
+    </body>
+</html>
