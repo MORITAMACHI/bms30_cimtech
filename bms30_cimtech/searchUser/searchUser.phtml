@@ -87,19 +87,21 @@
     	<?php
     	// 検索ボタンが押された時に下記処理へ
     	if(isset($_POST['search'])){
+		foreach ($array as $val ) {
+		
     	    ?>
 			<tr>
-				<td><a href="../detailUser/detailUser.php?user=<?=$user->getUser()?>&authority=<?=$user->getAuthority()?>" target="_self"><?=$user->getUser()?></a></td>
-				<td><?=$user->getEmail()?></td>
-				<td><?=$user->getAuthority()?></td>
+				<td><a href="../detailUser/detailUser.php?user=<?=$val->getUser()?>&authority=<?=$val->getAuthority()?>" target="_self"><?=$val->getUser()?></a></td>
+				<td><?=$val->getEmail()?></td>
+				<td><?=$val->getAuthority()?></td>
 				<td>
-					<a href="../updateUser/updateUser.php?user=<?=$user->getUser()?>&authority=<?=$user->getAuthority()?>">更新</a> <a
-					href="../deleteUser/deleteUser.php?user=<?=$user->getUser()?>&authority=<?=$user->getAuthority()?>"
+					<a href="../updateUser/updateUser.php?user=<?=$val->getUser()?>&authority=<?=$val->getAuthority()?>">更新</a> <a
+					href="../deleteUser/deleteUser.php?user=<?=$val->getUser()?>&authority=<?=$val->getAuthority()?>"
 					onclick="return clickEvent()">削除</a>
 				</td>
 			</tr>
     	<?php
-
+			}
             }
     	?>
     	</table>
