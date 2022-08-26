@@ -1,0 +1,123 @@
+<?php
+//セッションの開始
+session_start();
+
+//権限の判別
+if($_SESSION['userInfo']['authority'] == 1){
+    $authority = "一般ユーザー";
+}else{
+    $authority = "管理者";
+}
+?>
+
+
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>Insert title here</title>
+	</head>
+    <body><div align="center" >
+    <font color ="008000">
+	<h2>書籍管理システム</h2>
+    </font>
+
+    <hr align="center" size="3" color="green" >
+    </div>
+
+
+
+
+
+	<!-- メニューバー -->
+    <table align="center" width="100%">
+			<tr>
+				<td width="10%">[<a href="./menu.php">メニュー</a>]</td>
+				<td width="10%">[<a href="./list.php">書籍一覧</a>]</td>
+				<td width="60%" align="left" >
+					　　　　　　　　　　　　　　　　
+					<font color ="#800000" size="5">書籍登録</font>
+				</td>
+
+				<td>
+					<table>
+						<tr>
+							<td>名前：<?=$_SESSION['userInfo']['user']?></td>
+						</tr>
+						<tr>
+							<td>権限：<?=$authority?></td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+	</table>
+    <hr align="center" size="1" color="green" >
+    <br><br><br>
+
+<?php if(!isset($_POST['kekka'])){?>
+    <div align="center">
+
+		<form action="insert.php" method="post">
+    		<table align="center">
+    			<tr>
+    				<th bgcolor="#DDDDDD" width="200">ISBN</th>
+    				<td><input type="text" name="isbn" value=""></td>
+    			</tr>
+
+    			<tr>
+    				<th bgcolor="#DDDDDD" width="200">TITLE</th>
+    				<td><input type="text" name="title" value=""></td>
+    			</tr>
+
+    			<tr>
+    				<th bgcolor="#DDDDDD" width="200">価格</th>
+    				<td><input type="text" name="price" value=""></td>
+    			</tr>
+
+			</table>
+
+			<br><br>
+			<input type="submit" name="kekka" value="登録">
+		</form>
+	</div>
+<?php }else{ ?>
+    <div align="center">
+
+    		<table align="center">
+    			<tr>
+    				<th bgcolor="#DDDDDD" width="200">ISBN</th>
+    				<td><?=$_POST['isbn']?></td>
+    			</tr>
+
+    			<tr>
+    				<th bgcolor="#DDDDDD" width="200">TITLE</th>
+    				<td><?=$_POST['title']?></td>
+    			</tr>
+
+    			<tr>
+    				<th bgcolor="#DDDDDD" width="200">価格</th>
+    				<td><?=$_POST['price']?></td>
+    			</tr>
+
+				<tr>
+    			  <td><br>上記データを登録しました。<br></td>
+    			</tr>
+
+				<tr>
+					<td><br><a href="../listBook/listBook.php">書籍一覧へ戻る</a></td>
+					<td><br><a href="insert.php">続けて登録する</a></td>
+				</tr>
+			</table>
+
+	</div>
+
+
+<?php }?>
+
+
+<br><br><br>
+<HR align="center" size="2" color="green" ></HR>
+		<P>　Copyright (C) 2010 All Rights Reserved.</P>
+    </body>
+
+
+</html>
