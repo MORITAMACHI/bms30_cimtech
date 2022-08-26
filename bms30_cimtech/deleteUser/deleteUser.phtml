@@ -1,0 +1,85 @@
+<?php
+//セッションの開始
+session_start();
+
+//権限の判別
+if($_SESSION['userInfo']['authority'] == 1){
+    $authority = "一般ユーザー";
+}else{
+    $authority = "管理者";
+}
+
+?>
+
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>Insert title here</title>
+	</head>
+    <body>
+    <div align="center">
+    <font color ="008000">
+	<h2>書籍管理システム</h2>
+    </font>
+    <hr align="center" size="3" color="green">
+    </div>
+
+    <table align="center" width="950">
+			<tr>
+				<td width="75">[<a href="./menu.php">メニュー</a>]</td>
+				<td width="90">[<a href="../listUser/.php">ユーザー一覧</a>]</td>
+				<td  align="left" >
+					　　　　　　　　　　　　　　　　
+					<font color ="#800000" size="5">ユーザー削除</font>
+				</td>
+				<td width="100">
+				<table>
+						<tr>
+							<td>名前：<?=$_SESSION['userInfo']['user']?></td>
+						</tr>
+						<tr>
+							<td>権限：<?=$authority?></td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+	</table>
+
+    <hr align="center" size="1" color="green" >
+    <br>
+
+
+	<form action="deleteUser.php" method="post">
+    <table align="center" border="0">
+			<tr>
+				<th bgcolor="#DDDDDD" width="200">ユーザー</th>
+				<td  width="200"><?=$user->getUser()?></td>
+			</tr>
+
+			<tr>
+				<th bgcolor="#DDDDDD" width="200">パスワード</th>
+				<td  width="200"><?=$user->getPassword()?></td>
+			</tr>
+
+			<tr>
+				<th bgcolor="#DDDDDD" width="200">Eメール</th>
+				<td  width="200"><?=$user->getEmail()?></td>
+			</tr>
+
+			<tr>
+				<th bgcolor="#DDDDDD" width="200">権限</th>
+				<td  width="200"><?=$user->getAuthority()?></td>
+			</tr>
+
+
+	</table>
+	</form>
+<br>
+	<div align="center">
+	上記データを削除しました。<br><br><br>
+	<a href="../listUser/listUser.php">ユーザー一覧へ戻る</a>
+
+	</div>
+
+    </body>
+</html>
