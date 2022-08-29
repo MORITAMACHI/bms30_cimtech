@@ -46,7 +46,7 @@
 				foreach($userList as $val){
 				?>
 				<tr>
-					<td align="center" width="25%"><a href="../detailUser/detailUser.php?user<?= $val->getUser() ?>"><?= $val->getUser() ?></a></td>
+					<td align="center" width="25%"><a href="../detailUser/detailUser.php?user=<?= $val->getUser() ?>"><?= $val->getUser() ?></a></td>
 					<td align="center" width="25%"><?= $val->getEmail() ?></td>
 					<td align="center" width="25%"><?= $val->getAuthority() ?></td>
 					<td align="center" width="25%">
