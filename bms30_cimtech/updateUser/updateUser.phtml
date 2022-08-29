@@ -1,0 +1,142 @@
+<?php
+//セッションの開始
+session_start();
+
+//権限の判別
+if($_SESSION['userInfo']['authority'] == 1){
+    $authority = "一般ユーザー";
+}else{
+    $authority = "管理者";
+}
+
+//ユーザー情報を取得
+$user = $model->getUserInfo();
+
+?>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>UpdateUser</title>
+	</head>
+    <body>
+		<h1 align="center" color="red">書籍管理システム</h1>
+		<hr align="center" size="5" color="red" width="100%">
+		<table width="100%">
+			<tr>
+				<td width="11%"><a href="../menu/menu.php">メニュー</a></td>
+				<td width="11%"><a href="../insertUser/insertUser.php">ユーザー登録</a></td>
+				<td width="11%"><a href="../listUser/listUser.php">ユーザー一覧</a></td>
+				<td align="center" width="34%"><h2>ユーザー変更</h2></td>
+				<td width="33%">
+					<table align="right">
+						<tr>
+							<td>名前：<?=$_SESSION['userInfo']['user']?></td>
+						</tr>
+						<tr>
+							<td>権限：<?=$authority?></td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+		</table>
+		<hr align="center" size="2" color="red" width="100%">
+		<br><br>
+		<form action="updateUser.php" method="post">
+			<table align="center" width="55%">
+				<tr>
+					<td align="left" width="15%"></td>
+					<td align="center" width="20%">＜変更前情報＞</td>
+					<td align="center" width="20%">＜変更後情報＞</td>
+				</tr>
+				<tr>
+					<th align="left" width="15%" bgcolor="6666FF">　ユーザー名</th>
+					<td align="left" width="20%"><?=$user['user']?></td>
+					<td align="left" width="20%"><?=$user['user']?><input type="hidden" name="user" value="<?=$user['user']?>"></td>
+
+				</tr>
+
+				<tr>
+					<th align="left" width="15%" bgcolor="6666FF">　パスワード</th>
+					<td align="left" width="20%"><?=$user['password']?></td>
+				<?php
+                if($model->getExecute()==null){
+                ?>
+					<td align="left" width="20%" ><input type=text size="30" name="password" value="<?=$user['password']?>"></input></td>
+					<tr>
+					<th align="left" width="15%" bgcolor="6666FF">　パスワード（確認用）</th>
+					<td width="20%">&nbsp</td>
+					<td align="left" width="20%"><input type=password size="30" name="password2"></td>
+				</tr>
+				<?php
+				}else{
+                ?>
+					<td align="left" width="20%" ><?=$model->getPassword()?></td>
+				<?php
+				}
+                ?>
+				</tr>
+
+				<tr>
+					<th align="left" width="15%" bgcolor="#6666FF">　メールアドレス</th>
+					<td align="left" width="20%"><?=$user['email']?></td>
+				<?php
+                if($model->getExecute()==null){
+                ?>
+					<td align="left" width="20%" ><input type=text size="30" name="email" value="<?=$user['email']?>"></input></td>
+				<?php
+				}else{
+                ?>
+					<td align="left" width="20%" ><?=$model->getEmail()?></td>
+				<?php
+			    }
+                ?>
+				</tr>
+				<tr>
+					<th align="left" width="15%" bgcolor="6666FF">　権限</th>
+					<td align="left" width="20%"><?=$authority?></td>
+				<?php
+                if($model->getExecute()==null){
+                ?>
+					<td align="left" width="20%" >
+						<select name="authority">
+							<option value="1">ユーザー</option>
+							<option value="2">管理者</option>
+						</select>
+					</td>
+
+				<?php
+				}else{
+
+				    if($model->getAuthority() == 1){
+				        $insertAuthority = "ユーザー";
+				    }else{
+				        $insertAuthority = "管理者";
+				    }
+                ?>
+					<td align="left" width="20%" ><?=$insertAuthority?></td>
+				<?php
+				}
+                ?>
+				</tr>
+			</table>
+			<?php
+            if($model->getExecute()==null){
+            ?>
+<!-- 			<input type="hidden" name="execute" value="update"> -->
+				<p align="center"><input type="submit" name="execute" value="変更完了"></input></p>
+			<?php
+		    }else{
+            ?>
+				<p align="center"><font size="4">上記内容でデータを更新しました。</font></p>
+				<p align="center"><a href="../listUser/listUser.php">ユーザー一覧へ戻る</a></p>
+			<?php
+		    }
+            ?>
+	</form>
+	<br><br><br>
+	<hr align="center" size="2" color="red" width="100%">
+	<table align="center" width="100%">
+		<tr><td>Copyright (C) 2022 All Rights Reserved.</td></tr>
+	</table>
+	</body>
+</html>
