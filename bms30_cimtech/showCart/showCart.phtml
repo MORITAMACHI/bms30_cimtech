@@ -56,7 +56,7 @@ if($_SESSION['userInfo']['authority'] == 1){
 				<td><?=$val->getIsbn()?></td>
 				<td><?=$val->getTitle()?></td>
 				<td><?=$val->getPrice()?></td>
-				<td><?=$val->getTotalQuantity()?></td>
+				<td><?=$val->getQuantity()?></td>
 				<td><a href="./showCart.php?delno=<?=$val?>">削除</a></td>
 			</tr>
 		</table>
@@ -72,7 +72,7 @@ if($_SESSION['userInfo']['authority'] == 1){
 
 		<br><br>
 
-		<form action = "../buyConfirm.php">
+		<form action = "../buyConfirm/buyConfirm.php">
 			<input type="submit" value="購入">
 		</form>
 		<?php
