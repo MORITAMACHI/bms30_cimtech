@@ -14,7 +14,7 @@ class OrderStatus{
             $ordered = new Ordered();
 
             $ordered->setTitle($rows['title']);
-            $ordered->setUser($rows['userid']);
+            $ordered->setUser($rows['user']);
             $ordered->setQuantity($rows['quantity']);
             $ordered->setDate($rows['date']);
 
