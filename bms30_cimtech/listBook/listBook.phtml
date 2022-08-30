@@ -75,7 +75,7 @@ if($_SESSION['userInfo']['authority'] == 1){
 			        <td align="center" colspan="2">
 					<form action="../insertIntoCart/insertIntoCart.php" method="post">
 						<input type="text" size="5" name="quantity" value="">
-			    			<input type="submit" value="カートに入れる">
+			    			<input type="submit" name="insertIntoCart" value="カートに入れる">
 						<input type="hidden" name="isbn" value="<?=$row[0]?>">
 			     		</form>
 			       </td>
