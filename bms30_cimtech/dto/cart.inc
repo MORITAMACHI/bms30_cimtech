@@ -13,36 +13,51 @@ class Cart{
     private $price;
     private $quantity;
 
+    //コンストラクタ
+    public function __construct(){
+        $this->init();
+    }
+
+    //フィールド変数初期化
+    public function init(){
+        $this->isbn = null;
+        $this->title = null;
+        $this->price = null;
+        $this->quantity = null;
+    }
+
+
     //isbnゲッター
     public function getIsbn(){
         return $this->isbn;
-    }
-    //isbnセッター
-    public function setIsbn($isbn){
-        $this->isbn = $isbn;
     }
     //titleゲッター
     public function getTitle(){
         return $this->title;
     }
-    //titleセッター
-    public function setTitle($title){
-        $this->title = $title;
-    }
     //priceゲッター
     public function getPrice(){
         return $this->price;
-    }
-    //priceセッター
-    public function setPrice($price){
-        $this->price = $price;
     }
     //quantityゲッター
     public function getQuantity(){
         return $this->quantity;
     }
+    //isbnセッター
+    public function setIsbn($isbn){
+        $this->isbn = $isbn;
+    }
+
+    //titleセッター
+    public function setTitle($title){
+        $this->title = $title;
+    }
+    //priceセッター
+    public function setPrice($price){
+        $this->price = $price;
+    }
     //quantityセッター
-    public function setIsbn($quantity){
+    public function setQuantity($quantity){
         $this->quantity = $quantity;
     }
 }
