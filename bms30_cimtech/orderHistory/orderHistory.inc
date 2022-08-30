@@ -22,7 +22,7 @@ class OrderHistory{
      */
     public function select($db) {
         $sql = "SELECT b.title,o.quantity,o.date FROM orderinfo o inner join bookinfo b on o.isbn=b.isbn
-            WHERE o.user = '{$_SESSION['user']['user']}'";
+            WHERE o.user = '{$_SESSION['userInfo']['user']}'";
 
         $result = executeQuery($db, $sql);
         if(mysqli_num_rows($result) > 0){
