@@ -3,7 +3,6 @@
  * 購入確定機能（buyConfirm）
  */
 require_once '../dto/user.inc';
-require_once '../dto/order.inc';
 require_once '../lib/db.inc';
 require_once '../dto/cart.inc';
 //require '../lib/mail.inc';
