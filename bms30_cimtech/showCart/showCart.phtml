@@ -1,0 +1,94 @@
+<?php
+//セッションの開始
+session_start();
+
+//権限の判別
+if($_SESSION['userInfo']['authority'] == 1){
+    $authority = "一般ユーザー";
+}else{
+    $authority = "管理者";
+}
+
+?>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>カート内容</title>
+	</head>
+    <body>
+		<h1 align="center" color="red">書籍管理システム</h1>
+		<hr align="center" size="5" color="red" width="100%">
+		<table width="100%">
+			<tr>
+				<td width="33%">[<a href="./menu.php">メニュー</a>]　　
+								[<a href="./list.php">書籍一覧</a>]</td>
+				<td align="center" width="34%"><h2>購入状況確認</h2></td>
+				<td width="33%">
+					<table align="right">
+						<tr>
+							<td>名前：<?=$_SESSION['userInfo']['user']?></td>
+						</tr>
+						<tr>
+							<td>権限：<?=$authority?></td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+		</table>
+		<hr align="center" size="2" color="red" width="100%">
+		<br><br>
+		<?php
+		if(isset($_SESSION['cartInfo'])){
+		?>
+		<table align="center" >
+			<tr>
+				<td>ISBN</td>
+				<td>Title</td>
+				<td>価格</td>
+				<td>購入数</td>
+				<td></td>
+			</tr>
+			<?php
+			foreach($_SESSION['cartInfo'] as $val){
+			    $total += $val->getPrice();
+			?>
+			<tr>
+				<td><?=$val->getIsbn()?></td>
+				<td><?=$val->getTitle()?></td>
+				<td><?=$val->getPrice()?></td>
+				<td><?=$val->getTotalQuantity()?></td>
+				<td><a href="./showCart.php?delno=<?=$val?>">削除</a></td>
+			</tr>
+		</table>
+
+		<hr>
+
+		<table>
+			<tr>
+				<td>合計</td>
+				<td><?=$total?>円</td>
+			</tr>
+		</table>
+
+		<br><br>
+
+		<form action = "../buyConfirm.php">
+			<input type="submit" value="購入">
+		</form>
+		<?php
+	       	}
+		}else{
+		    //カートの中身がない場合
+		    echo "購入状況はありません。";
+		}
+		?>
+
+
+
+		<br><br><br>
+		<hr align="center" size="2" color="red" width="100%">
+		<table align="center" width="100%">
+			<tr><td>Copyright (C) 2022 All Rights Reserved.</td></tr>
+		</table>
+	</body>
+</html>
