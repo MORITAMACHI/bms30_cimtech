@@ -18,6 +18,7 @@
     	<h3>エラー</h3>
     	<hr style="margin-bottom: 20px;">
     	<?=$msg?>
+	    <a href="../menu/menu.php">メニューへ</a>
     </div>
 
 
