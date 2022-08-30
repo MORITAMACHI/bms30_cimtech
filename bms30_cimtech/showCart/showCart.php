@@ -7,6 +7,9 @@ $showCart = new ShowCart();
 
 require_once '../lib/util.inc';
 
+//セッションの開始
+session_start();
+
 //書籍情報を削除
 $showCart->DeleteBook();
 
