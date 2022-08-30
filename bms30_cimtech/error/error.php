@@ -1,7 +1,7 @@
 <?php
-  if(isset($_GET['ERR']){
+  if(isset($_GET['ERR'])){
     $msg = $_GET['ERR'];
-  }elseif(isset($_GET['errMsg']){
+  }elseif(isset($_GET['errMsg'])){
 	  $msg = $_GET['errMsg'];
   }
 
