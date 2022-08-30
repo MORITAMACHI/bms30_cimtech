@@ -4,8 +4,8 @@ class insertUser{
 //データ取得
 public function getForm($user){
     //ユーザーID
-    if(isset($_POST['userid'])){
-        $user->setUserid($_POST['userid']);
+    if(isset($_POST['user'])){
+        $user->setUser($_POST['user']);
     }
     //パスワード
     if(isset($_POST['password'])){
@@ -47,14 +47,17 @@ public function getForm($user){
  */
 
 public function insert($user,$db){
-    $userid = $user->getUserid();
-    $password = $user->getPassword();
-    $email = $user->getEmail();
-    $authority = $user->getAuthority();
+   
+    if(isset($_POST['insertUser'])){
+       $user = $user->getUser();
+       $password = $user->getPassword();
+       $email = $user->getEmail();
+       $authority = $user->getAuthority();
 
-    $sql = "INSERT INTO userinfo VALUES('{$userid}', '{$password}', '{$email}', '{$authority}')";
+       $sql = "INSERT INTO userinfo VALUES('{$user}', '{$password}', '{$email}', '{$authority}')";
 
-    executeQuery($db,$sql);
+       executeQuery($db,$sql);
+    }
 }
 
 
