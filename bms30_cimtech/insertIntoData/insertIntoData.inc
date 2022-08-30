@@ -40,7 +40,7 @@ class InsertIntoData{
         $rows = mysqli_num_rows($result);
         if($rows){
             $errMsg = "書籍データが既に存在するため、初期データは登録できません。";
-            header("Location: ../error/error.php?{$errMsg}");
+            header("Location: ../error/error.php?ERR={$errMsg}");
             exit;
         }
     }
