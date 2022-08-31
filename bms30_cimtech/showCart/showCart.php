@@ -1,5 +1,5 @@
 <?php
-require_once '../dto/Cart.inc';
+require_once '../dto/Sales.inc';
 $sales = new Sales();
 
 require_once 'showCart.inc';
