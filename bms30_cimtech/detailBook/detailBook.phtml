@@ -39,7 +39,7 @@ if($_SESSION['userInfo']['authority'] == 1){
 		<br><br>
 
 		<?php
-		if($_POST['user']['authority'] == 1){
+		if($_POST['userInfo']['authority'] == 1){	// 一般ユーザー
 		?>
 		<br><br><br>
 	<form action="listBook.php" method="post">
@@ -70,16 +70,16 @@ if($_SESSION['userInfo']['authority'] == 1){
 		<div align="center">
 		<table border="0">
 		<!-- 変更ボタン -->
-		<td><form action="listBook.php" method="post">
+		<td><form action="../deleteBook/deleteBook.php" method="post">
 			<input type="hidden" name="isbn" value="<?=$_POST['isbn']?>">
-			<input type="submit" name="kekka" value="変更">
-			</form>
+			<input type="submit" name="kekka" value="削除">
+		</form>
 		</td>
 		<td>&emsp;</td>
 		<!-- 削除ボタン -->
-		<td><form action="updateBook.php" method="post">
+		<td><form action="../updateBook/updateBook.php" method="post">
 			<input type="hidden" name="isbn" value="<?=$_POST['isbn']?>">
-			<input type="submit" name="updateBook" value="削除">
+			<input type="submit" name="updateBook" value="変更">
 			</form>
 		</td>
 		</table>
@@ -87,7 +87,7 @@ if($_SESSION['userInfo']['authority'] == 1){
 
 	<br><br>
 
-		<form action="listBook.php" method="post">
+<!-- 		<form action="listBook.php" method="post"> -->
     <table align="center" border="0">
     <tr>
     <th bgcolor="#DDDDDD" width="200">ISBN</th>
@@ -106,7 +106,7 @@ if($_SESSION['userInfo']['authority'] == 1){
 
 
 	</table>
-	</form>
+<!-- 	</form> -->
 
 
 
