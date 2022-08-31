@@ -39,29 +39,16 @@ if($_SESSION['userInfo']['authority'] == 1){
 		<br><br>
 
 		<?php
-		if($_POST['userInfo']['authority'] == 1){	// 一般ユーザー
+		if($authority == "一般ユーザー"){	// 一般ユーザー
 		?>
 		<br><br><br>
-	<form action="listBook.php" method="post">
-    <table align="center" border="0">
-    <tr>
-    <th bgcolor="#DDDDDD" width="200">ISBN</th>
-    <td bgcolor="#CCFFCC" width="200"><?=$book->getIsbn()?></td>
-			</tr>
+		<div align="center">
+        	<form action="../insertIntoCart/insertIntoCart.php" method="post">
+        		<input type="text" name="quantity" style="width: 100px;" placeholder="Quantity">
+        		<input type="submit" name="insertIntoCart" value="insertIntoCart">
 
-			<tr>
-				<th bgcolor="#DDDDDD" width="200">TITLE</th>
-				<td bgcolor="#CCFFCC" width="200"><?=$book->getTitle()?></td>
-			</tr>
-
-			<tr>
-				<th bgcolor="#DDDDDD" width="200">価格</th>
-				<td bgcolor="#CCFFCC" width="200"><?=$book->getPrice()?>円</td>
-			</tr>
-
-
-	</table>
-	</form>
+        	</form>
+		</div>
 
 	<?php
 		}else{
@@ -87,7 +74,14 @@ if($_SESSION['userInfo']['authority'] == 1){
 
 	<br><br>
 
+
+		<?php
+		}
+		?>
+
+
 <!-- 		<form action="listBook.php" method="post"> -->
+	<!-- Common -->
     <table align="center" border="0">
     <tr>
     <th bgcolor="#DDDDDD" width="200">ISBN</th>
@@ -109,10 +103,6 @@ if($_SESSION['userInfo']['authority'] == 1){
 <!-- 	</form> -->
 
 
-
-		<?php
-		}
-		?>
 
 	<br><br><br><br><br><br><br><br><br><br><br>
 
