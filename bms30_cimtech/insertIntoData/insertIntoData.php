@@ -2,6 +2,8 @@
 require_once './insertIntoData.inc';
 require_once '../dto/user.inc';
 
+session_start();
+
 $model = new InsertIntoData();
 $User = new User();
 
