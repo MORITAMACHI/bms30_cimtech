@@ -62,22 +62,7 @@ class Login
                 header('Location: ../menu/menu.php');
                 exit();
             } else {
-                $errMsg = "入力されたユーザーは存在しません。";
-                return $errMsg;
-            }
-        }
-    }
-
-    /*
-     * エラー処理
-     */
-    public function checkParameter($User){
-        if(isset($_POST['login'])){
-            if($User->getUser() == ""){
-                $errMsg = "ユーザー名を入力してください。";
-                return $errMsg;
-            }else if($User->getPassword() == ""){
-                $errMsg = "パスワードを入力してください。";
+                $errMsg = "ユーザー名またはパスワードが間違っています。";
                 return $errMsg;
             }
         }

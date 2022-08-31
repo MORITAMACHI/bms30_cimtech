@@ -6,7 +6,6 @@ $User = new User();
 $model = new Login();
 
 $User = $model->getForm();
-$result = $model->checkParameter($User);
 $result = $model->searchUser($User);
 
 include './login.phtml';
