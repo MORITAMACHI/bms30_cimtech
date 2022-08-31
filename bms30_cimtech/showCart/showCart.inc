@@ -1,3 +1,5 @@
+<?php
+
 class ShowCart{
 
     //削除リンクから戻ってきている場合、書籍情報を削除
@@ -20,3 +22,4 @@ class ShowCart{
     }
 
 }
+?>
