@@ -13,19 +13,27 @@ class InsertIntoCart{
      */
     public function getUserInfo()
     {
+
         // ユーザークラスのオブジェクト生成
         $user = new User();
 
-        // セッションからユーザー情報取得
-        $userInfo = $_SESSION['userInfo'];
-        $user->setUser($userInfo['user']);
-        if($userInfo['authority'] == 1){
-            $authority = "一般ユーザー";
-            $user->setAuthority($authority);
+        if(isset($_SESSION['userInfo'])){
+            // セッションからユーザー情報取得
+            $userInfo = $_SESSION['userInfo'];
+            $user->setUser($userInfo['user']);
+            if($userInfo['authority'] == 1){
+                $authority = "一般ユーザー";
+                $user->setAuthority($authority);
+            }else{
+                $authority = "管理者";
+                $user->setAuthority($authority);
+            }
         }else{
-            $authority = "管理者";
-            $user->setAuthority($authority);
+            $errMsg = "セッション切れの為、ログインし直してください。";
+            header("Location: ../error/error.php?errMsg={$errMsg}");
+            exit;
         }
+
         return $user;
     }
 
@@ -49,7 +57,7 @@ class InsertIntoCart{
                return $book;
            }else{
                $errMsg = "指定された書籍データが存在しない為、書籍をカートに追加できません。";
-               header("Location: ../error/error.php?'{$errMsg}'");
+               header("Location: ../error/error.php?{$errMsg}");
                exit;
            }
         }
