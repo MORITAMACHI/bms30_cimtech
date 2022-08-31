@@ -57,7 +57,7 @@ if($_SESSION['userInfo']['authority'] == 1){
 				<td><?=$val->getTitle()?></td>
 				<td><?=$val->getPrice()?></td>
 				<td><?=$val->getQuantity()?></td>
-				<td><a href="./showCart.php?delno=<?=$val?>">削除</a></td>
+				<td><a href="./showCart.php?delno=<?=$val->getIsbn?>">削除</a></td>
 			</tr>
 		</table>
 
