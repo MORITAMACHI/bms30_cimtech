@@ -9,21 +9,28 @@ class listUser{
      */
     public function getUserInfo()
     {
+
         // ユーザークラスのオブジェクト生成
-        $user1 = new User();
+        $user = new User();
 
         // セッションからユーザー情報取得
-        session_start();
         $userInfo = $_SESSION['userInfo'];
-        $user1->setUser($userInfo['user']);
-        if($userInfo['authority'] == 1){
-            $authority = "一般ユーザー";
-            $user1->setAuthority($authority);
+        if(isset($userInfo)){
+            $user->setUser($userInfo['user']);
+            if($userInfo['authority'] == 1){
+                $authority = "一般ユーザー";
+                $user->setAuthority($authority);
+            }else{
+                $authority = "管理者";
+                $user->setAuthority($authority);
+            }
         }else{
-            $authority = "管理者";
-            $user1->setAuthority($authority);
+            $errMsg = "セッション切れの為、ログインし直してください。";
+            header("Location: ../error/error.php?errMsg={$errMsg}");
+            exit;
         }
-        return $user1;
+
+        return $user;
     }
 
     /*

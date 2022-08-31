@@ -19,9 +19,9 @@ class BuyConfirm
         // ユーザークラスのオブジェクト生成
         $user = new User();
 
-        if(isset($_SESSION['userInfo'])){
-            // セッションからユーザー情報取得
-            $userInfo = $_SESSION['userInfo'];
+        // セッションからユーザー情報取得
+        $userInfo = $_SESSION['userInfo'];
+        if(isset($userInfo)){
             $user->setUser($userInfo['user']);
             if($userInfo['authority'] == 1){
                 $authority = "一般ユーザー";
